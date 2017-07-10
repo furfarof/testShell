@@ -667,19 +667,7 @@ http://www.exploit-monday.com
         [Byte[]] $Shellcode32 = $Shellcode
         [Byte[]] $Shellcode64 = $Shellcode32
     }
-    else
-    {
-        # Pop a calc... or whatever shellcode you decide to place in here
-        # I sincerely hope you trust that this shellcode actually pops a calc...
-        # Insert your shellcode here in the for 0xXX,0xXX,...
-        # 32-bit payload
-        # msfpayload windows/exec CMD="cmd /k calc" EXITFUNC=thread
-        [Byte[]] $Shellcode32 = @(0x90)
 
-        # 64-bit payload
-        # msfpayload windows/x64/exec CMD="calc" EXITFUNC=thread
-        [Byte[]] $Shellcode64 = @(0x90)
-    }
 
     if ( $PSBoundParameters['ProcessID'] )
     {
