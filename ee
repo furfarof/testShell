@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import smtplib
+
+sender = 'yann.toe@al-enterprise.com'
+receivers = ['francesco.furfaro@cgi.com']
+
+message = """From: Yann Toe <yann.toe@al-enterprise.com>
+To: Francesco Furfaro <francesco.furfaro@cgi.com>
+MIME-Version: 1.0
+Content-type: text/html
+Subject: Welcome to You
+
+<html>
+<body>
+<p>Hello</p>
+<p>How are you ?</p>
+<p>See you ! you can contact me <a href="http://al-entreprise.com/rid=5445">here</a></p>
+
+Regards !
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADlSURBVGhD7dIhDgIxFIThVSQo7sAZkFwDBJbjoJAcAA13QHIGDA4FBoGCeWRfgiJp9027m8yfTNK6fkkbNaAm2Ju4IzbC6LEhtiIYhzy+t7jmWFEMG3LF7u2ZimFDTtgMo2NKQCw6phTEomJKQiwapjTEomBqQKxfzAHrjKkFsUIxbMgZm/7ZEnthnTFsSOo2WFYsiH2bS8JumL1jj2XFgqS2wgSxBAlOEE+Q4ATxBAlOEE+Q4ATxBAlOEE+Q4ATxBAlOEE+Q4ATxBAlOEM8hT2xRcVssBNKXZUPG2K5HW2NqIDXNB3xxTcNVu9LOAAAAAElFTkSuQmCC">
+
+</body>
+</html>
+"""
+
+try:
+   smtpObj = smtplib.SMTP('localhost')
+   smtpObj.sendmail(sender, receivers, message)         
+   print "Successfully sent email"
+except SMTPException:
+   print "Error: unable to send email"
